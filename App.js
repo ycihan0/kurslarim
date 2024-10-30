@@ -1,10 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, FlatList, View, Button, Text } from "react-native";
 import CourseInput from "./components/CourseInput";
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [course, setCourse] = useState([]);
 
   const startModal = () => {
     setModalVisible(true);
@@ -14,12 +15,34 @@ export default function App() {
     setModalVisible(false);
   };
 
+  const addCourse = (courseTitle) => {
+    setCourse((currentCourses) => [
+      ...currentCourses,
+      { text: courseTitle, id: Math.random().toString() },
+    ]);
+    endModal();
+  };
+
   return (
     <>
       <StatusBar style="light" />
       <View style={styles.container}>
         <Button title="Kurs Ekle" color="red" onPress={startModal} />
-        <CourseInput visible={modalVisible} onCancel={endModal} />
+        <CourseInput
+          visible={modalVisible}
+          onCancel={endModal}
+          onAddCourse={addCourse}
+        />
+        <View>
+          <FlatList
+            data={course}
+            renderItem={({ item }) => (
+              <View>
+                <Text>{item.text}</Text>
+              </View>
+            )}
+          />
+        </View>
       </View>
     </>
   );
