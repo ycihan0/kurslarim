@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  Text,
   View,
   Modal,
   Image,
@@ -9,7 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 
-export default function CourseInput({ visible }) {
+export default function CourseInput({ visible , onCancel}) {
   return (
     <Modal animationType="slide" visible={visible}>
       <View style={styles.inputContainer}>
@@ -20,7 +19,7 @@ export default function CourseInput({ visible }) {
         <TextInput style={styles.textInput} placeholder="Yeni Kurs Ekle" />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <Button title="İptal Et" color="red" />
+            <Button title="İptal Et" color="red" onPress={onCancel}/>
           </View>
           <View style={styles.button}>
             <Button title="Ekle" color="blue" />

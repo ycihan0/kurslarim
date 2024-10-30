@@ -10,12 +10,16 @@ export default function App() {
     setModalVisible(true);
   };
 
+  const endModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <>
       <StatusBar style="light" />
       <View style={styles.container}>
         <Button title="Kurs Ekle" color="red" onPress={startModal} />
-        <CourseInput visible={modalVisible} />
+        <CourseInput visible={modalVisible} onCancel={endModal} />
       </View>
     </>
   );
